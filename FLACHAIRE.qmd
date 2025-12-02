@@ -399,3 +399,19 @@ final_grades %>%
   ) +
   theme_minimal()
 ```
+
+### Question 25
+
+```{r}
+# boxplot of final grades by group and separated by sex
+final_grades %>%
+  ggplot(aes(x = factor(group), y = final_grade, fill = sex)) +
+  geom_boxplot() +
+  labs(
+    title = "Final Grades by Group and Sex",
+    x = "Group",
+    y = "Final Grade",
+    fill = "Sex"
+  ) +
+  theme_minimal()
+```
