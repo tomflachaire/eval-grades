@@ -72,3 +72,12 @@ students %>%
   geom_col(fill = "steelblue") +
   labs(title = "Number of Students per Group", x = "Group", y = "Students")
 ```
+## Question 6
+
+```{r}
+students %>%
+  count(group, sex) %>%
+  ggplot(aes(x = factor(group), y = n, fill = sex)) +
+  geom_col() +
+  labs(title = "Gender Balance per Group", x = "Group", y = "Students")
+```
