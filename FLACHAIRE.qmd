@@ -485,3 +485,19 @@ fail_course <- avg_per_course %>%
 # so the most responsible course
 fail_course %>% slice_head(n = 1)
 ```
+
+### Question 30
+
+```{r}
+# Age + success rate
+pass_df %>%
+  left_join(students %>% mutate(age = round(time_length(today() - birth_date, "year"))) %>% select(id, age), by = "id") %>%
+  group_by(age) %>%
+  summarise(success_rate = mean(pass) * 100, .groups = "drop") %>%
+  ggplot(aes(x = age, y = success_rate)) +
+  geom_line() +
+  geom_point() +
+  labs(x = "Age", y = "Success rate (%)", title = "Success rate by Age") +
+  theme_minimal()
+```
+
