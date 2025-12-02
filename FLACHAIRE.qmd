@@ -12,10 +12,11 @@ library(ggplot2)
 library(dplyr)
 library(readr)
 library(knitr)
+library(here)
 ```
 
 ```{r}
-courses <- read_csv("courses.csv")
+courses <- read_csv(here("courses.csv"))
 ```
 
 ## Question 2
