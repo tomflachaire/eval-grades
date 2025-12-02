@@ -167,4 +167,18 @@ grades %>%
        x = "Module", y = "Grade")
 ```
 
+# 4. Attendance analysis
 
+### Question 13
+
+```{r}
+
+# We compute the number of grades per student
+grades %>%
+  filter(!is.na(grade)) %>%
+  group_by(id) %>%
+  summarise(n_grades = n()) %>%
+  left_join(students, by = "id") %>%
+  select(id, group, sex, n_grades) %>%
+  slice_head(n = 10) %>%
+  kable(caption = "Number of grades per student (first 10 rows)")
