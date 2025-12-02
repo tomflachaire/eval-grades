@@ -320,3 +320,23 @@ ggplot(avg_two_courses, aes(x = `6`, y = `5`)) + # with x = Cryptography, y = El
   ) +
   theme_minimal()                           
 ```
+
+### Question 21
+
+```{r}
+# Compute average grades per student for the two courses
+avg_courses <- grades %>%
+  filter(!is.na(grade) & course_id %in% c(2, 10)) %>%  # 2: Airship Piloting, 10: Etiquette
+  group_by(id, course_id) %>%
+  summarise(avg_grade = mean(grade), .groups = "drop") %>%
+  pivot_wider(names_from = course_id, values_from = avg_grade) %>%
+  left_join(students, by = "id")  # add group
+
+# correlation per group
+cor_by_group <- avg_courses %>%
+  group_by(group) %>%
+  summarise(correlation = cor(`10`, `2`, use = "complete.obs"))  # 10 = Etiquette, 2 = Airship
+
+cor_by_group %>% 
+  kable(caption = "Correlation between Etiquette and Airship by group")
+```
