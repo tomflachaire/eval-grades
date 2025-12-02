@@ -32,4 +32,17 @@ courses %>%
   ) %>%
   kable(caption = "Course description table")
 ```
+## Question 3
 
+```{r}
+students <- read_csv(here("students.csv"),
+  col_types = cols(
+    id = col_integer(),
+    group = col_factor(),
+    birth_date = col_date(format = ""),
+    sex = col_factor()
+  )
+)
+
+str(students)
+```
