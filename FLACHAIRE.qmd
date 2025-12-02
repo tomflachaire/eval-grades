@@ -441,3 +441,15 @@ pass_df <- avg_per_course %>%
 pass_df %>%
   slice_sample(n = 10)
 ```
+
+### Question 27
+
+```{r}
+n_students <- pass_df %>%
+  filter(!pass & final_grade >= 10) %>%
+  summarise(n = n()) %>%
+  pull(n)
+
+# Print as a sentence
+cat("There are", n_students, "students who do not pass but have a final grade >= 10.")
+```
