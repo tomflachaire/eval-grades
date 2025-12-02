@@ -84,7 +84,7 @@ str(grades)
 students %>%
   count(group) %>%
   ggplot(aes(x = factor(group), y = n)) +
-  geom_col(fill = "steelblue") +
+  geom_col(fill = "blue") +
   labs(title = "Number of Students per Group", x = "Group", y = "Students")
 ```
 
@@ -104,7 +104,7 @@ students %>%
 students %>%
   mutate(age = round(time_length(today() - birth_date, "year"))) %>%
   ggplot(aes(x = age)) +
-  geom_histogram(binwidth = 1, fill = "steelblue", color = "white") +
+  geom_histogram(binwidth = 1, fill = "blue", color = "white") +
   labs(title = "Distribution of Student Ages", x = "Age", y = "Number of Students")
 ```
 
@@ -255,7 +255,7 @@ grades %>%
   geom_col() +
   labs(title = "Average number of grades in Alchemy and Chemical Engineering by Group",
        x = "Group",
-       y = "Average Number of Grades")
+       y = "Average number of grades")
 ```
 
 The graph shows that the average number of grades per student is quite similar across all groups, indicating a homogeneous distribution.
@@ -277,6 +277,10 @@ grades %>%
        y = "Average number of grades",
        fill = "Sex")
 ```
+
+This bar chart shows minimal variation by sex.
+
+# 5. Grade analysis
 
 ### Question 19
 
@@ -301,7 +305,7 @@ grades_wide %>%
 ### Question 20
 
 ```{r}
-# Compute average grades per student for the two courses
+# We can compute average grades per student for the two courses
 avg_two_courses <- grades %>%
   filter(!is.na(grade) & course_id %in% c(5, 6)) %>%  # only Electrical Engineering (5) and Cryptography (6)
   group_by(id, course_id) %>%
@@ -318,8 +322,10 @@ ggplot(avg_two_courses, aes(x = `6`, y = `5`)) + # with x = Cryptography, y = El
     x = "Cryptography and Codebreaking (avg grade)",
     y = "Electrical Engineering and Telegraphy (avg grade)"
   ) +
-  theme_minimal()                           
+  theme_minimal() 
 ```
+
+This scatter plot illustrates a slight positive correlation between average grades in Electrical Engineering and Cryptography.
 
 ### Question 21
 
@@ -363,6 +369,8 @@ avg_courses %>%
   theme_minimal()
 ```
 
+This scatter plot shows a negative correlation between grades in Airship Piloting and Navigation and Etiquette and Social Graces.
+
 ### Question 23
 
 ```{r}
@@ -400,6 +408,8 @@ final_grades %>%
   theme_minimal()
 ```
 
+Groups 9 and 12 have the lowest and least consistent final grades compared to the other groups.
+
 ### Question 25
 
 ```{r}
@@ -415,6 +425,8 @@ final_grades %>%
   ) +
   theme_minimal()
 ```
+
+This box plot shows that final grades vary by group and sex, with some groups displaying significant differences in median grades and variability between males and females.
 
 ### Question 26
 
@@ -469,7 +481,7 @@ ggplot(pass_rate, aes(x = factor(group), y = pass_rate)) +
   theme_minimal()
 ```
 
-We can see graphically that group 9 and group 12 have a lot more difficulties than others.
+We can see graphically that group 9 and group 12 have a lot more difficulties than others, as we saw before.
 
 ### Question 29
 
@@ -485,6 +497,7 @@ fail_course <- avg_per_course %>%
 # so the most responsible course
 fail_course %>% slice_head(n = 1)
 ```
+Alchemy and Chemical Engineering is the course that is the most responsible of student failure owing to grades below than 5.
 
 ### Question 30
 
@@ -501,3 +514,4 @@ pass_df %>%
   theme_minimal()
 ```
 
+The success rate fluctuates significantly with age.
