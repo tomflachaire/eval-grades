@@ -239,3 +239,22 @@ grades %>%
        x = "Grades",
        y = "Students")
 ```
+
+### Question 17 
+
+```{r}
+grades %>%
+  filter(course_id == 4 & !is.na(grade)) %>%
+  group_by(id) %>%
+  summarise(n_grades = n()) %>%
+  left_join(students, by = "id") %>%
+  group_by(group) %>%
+  summarise(mean_grades = mean(n_grades)) %>%
+  ggplot(aes(x = factor(group), y = mean_grades)) +
+  geom_col() +
+  labs(title = "Average number of grades in Alchemy and Chemical Engineering by Group",
+       x = "Group",
+       y = "Average Number of Grades")
+```
+
+The graph shows that the average number of grades per student is quite similar across all groups, indicating a homogeneous distribution.
