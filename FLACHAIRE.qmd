@@ -4,7 +4,11 @@ author: "Tom Flachaire"
 format: html
 ---
 
-## Question 1 
+# 1. Introduction
+
+## 1.1 Study organisation
+
+### Question 1 
 
 ```{r}
 here::i_am("eval-grades.Rproj")
@@ -20,7 +24,7 @@ library(lubridate)
 courses <- read_csv(here("courses.csv"))
 ```
 
-## Question 2
+### Question 2
 
 ```{r}
 courses %>%
@@ -34,7 +38,9 @@ courses %>%
   kable(caption = "Course description table")
 ```
 
-## Question 3
+## 1.2 Students
+
+### Question 3
 
 ```{r}
 students <- read_csv(here("students.csv"),
@@ -49,7 +55,9 @@ students <- read_csv(here("students.csv"),
 str(students)
 ```
 
-## Question 4 
+## 1.3 Grades
+
+### Question 4 
 
 ```{r}
 grades <- read_delim(here("grades.csv"),
@@ -65,7 +73,9 @@ grades <- read_delim(here("grades.csv"),
 str(grades)
 ```
 
-## Question 5 
+# 2. Student population analysis
+
+### Question 5 
 
 ```{r}
 students %>%
@@ -75,7 +85,7 @@ students %>%
   labs(title = "Number of Students per Group", x = "Group", y = "Students")
 ```
 
-## Question 6
+### Question 6
 
 ```{r}
 students %>%
@@ -85,7 +95,7 @@ students %>%
   labs(title = "Gender Balance per Group", x = "Group", y = "Students")
 ```
 
-## Question 7 
+### Question 7 
 
 ```{r}
 students %>%
@@ -95,7 +105,7 @@ students %>%
   labs(title = "Distribution of Student Ages", x = "Age", y = "Number of Students")
 ```
 
-## Question 8 
+### Question 8 
 
 ```{r}
 students %>%
@@ -105,7 +115,7 @@ students %>%
   kable(caption = "Median age of students per group")
 ```
 
-## Question 9 
+### Question 9 
 
 ```{r}
 students %>%
@@ -117,4 +127,6 @@ students %>%
   arrange(desc(age)) %>%
   kable(caption = "Oldest student in each group")
 ```
+
+# 3. Simple grade analysis
 
