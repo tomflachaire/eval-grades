@@ -63,11 +63,12 @@ grades <- read_delim(here("grades.csv"),
 
 str(grades)
 ```
+## Question 5 
 
-
-
-
-)
-
-str(students)
+```{r}
+students %>%
+  count(group) %>%
+  ggplot(aes(x = factor(group), y = n)) +
+  geom_col(fill = "steelblue") +
+  labs(title = "Number of Students per Group", x = "Group", y = "Students")
 ```
