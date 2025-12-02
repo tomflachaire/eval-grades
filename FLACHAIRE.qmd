@@ -4,6 +4,8 @@ author: "Tom Flachaire"
 format: html
 ---
 
+Here is the link of my github : https://github.com/tomflachaire/eval-grades.git
+
 # 1. Introduction
 
 ## 1.1 Study organisation
