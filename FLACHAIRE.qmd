@@ -385,3 +385,17 @@ final_grades %>%
   slice_head(n = 5) %>%
   kable(caption = "First five students by final grade")
 ```
+
+### Question 24
+
+```{r}
+final_grades %>%
+  ggplot(aes(x = factor(group), y = final_grade)) +  
+  geom_boxplot() +
+  labs(
+    title = "Distribution of final grades by group",
+    x = "Group",
+    y = "Final grade"
+  ) +
+  theme_minimal()
+```
