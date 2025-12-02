@@ -470,3 +470,18 @@ ggplot(pass_rate, aes(x = factor(group), y = pass_rate)) +
 ```
 
 We can see graphically that group 9 and group 12 have a lot more difficulties than others.
+
+### Question 29
+
+```{r}
+# we count number of students failing a course (avg < 5)
+fail_course <- avg_per_course %>%
+  filter(avg_course < 5) %>%
+  group_by(course_id) %>%
+  summarise(n_fail = n(), .groups = "drop") %>%
+  left_join(courses %>% select(course_id, course), by = "course_id") %>%
+  arrange(desc(n_fail))
+
+# so the most responsible course
+fail_course %>% slice_head(n = 1)
+```
