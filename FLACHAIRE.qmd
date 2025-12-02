@@ -95,3 +95,13 @@ students %>%
   labs(title = "Distribution of Student Ages", x = "Age", y = "Number of Students")
 ```
 
+## Question 8 
+
+```{r}
+students %>%
+  mutate(age = round(time_length(today() - birth_date, "year"))) %>%
+  group_by(group) %>%
+  summarise(median_age = as.integer(median(age))) %>%
+  kable(caption = "Median age of students per group")
+```
+
