@@ -297,3 +297,26 @@ grades_wide %>%
   slice_head(n = 5) %>%
   kable(caption = "Average grades per student (full table has all courses, course names as columns)")
 ```
+
+### Question 20
+
+```{r}
+# Compute average grades per student for the two courses
+avg_two_courses <- grades %>%
+  filter(!is.na(grade) & course_id %in% c(5, 6)) %>%  # only Electrical Engineering (5) and Cryptography (6)
+  group_by(id, course_id) %>%
+  summarise(avg_grade = mean(grade), .groups = "drop") %>%
+  pivot_wider(names_from = course_id, values_from = avg_grade) %>%
+  left_join(students, by = "id") 
+
+# Scatter plot
+ggplot(avg_two_courses, aes(x = `6`, y = `5`)) + # with x = Cryptography, y = Electrical Engineering
+  geom_point() +                                 
+  geom_smooth(method = "lm", se = FALSE, color = "blue") + # trend line
+  labs(
+    title = "Average Grades: Electrical Engineering vs Cryptography",
+    x = "Cryptography and Codebreaking (avg grade)",
+    y = "Electrical Engineering and Telegraphy (avg grade)"
+  ) +
+  theme_minimal()                           
+```
