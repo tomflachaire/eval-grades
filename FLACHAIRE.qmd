@@ -20,6 +20,7 @@ library(readr)
 library(knitr)
 library(here)
 library(lubridate)
+library(tidyr)
 ```
 
 ```{r}
@@ -275,4 +276,24 @@ grades %>%
        x = "Group",
        y = "Average number of grades",
        fill = "Sex")
+```
+
+### Question 19
+
+```{r}
+grades_named <- grades %>%
+  filter(!is.na(grade)) %>%
+  left_join(courses, by = c("course_id")) %>%  # ajouter nom du cours
+  group_by(id, course) %>%
+  summarise(avg_grade = mean(grade), .groups = "drop") %>%
+  left_join(students, by = "id") %>%
+  select(id, group, course, avg_grade)
+
+grades_wide <- grades_named %>%
+  pivot_wider(names_from = course, values_from = avg_grade)
+
+# We display a small extract
+grades_wide %>%
+  slice_head(n = 5) %>%
+  kable(caption = "Average grades per student (full table has all courses, course names as columns)")
 ```
