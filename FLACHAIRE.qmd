@@ -453,3 +453,20 @@ n_students <- pass_df %>%
 # Print as a sentence
 cat("There are", n_students, "students who do not pass but have a final grade >= 10.")
 ```
+
+### Question 28
+
+```{r}
+# Pass rate per group
+pass_rate <- pass_df %>%
+  group_by(group) %>%
+  summarise(pass_rate = mean(pass) * 100)
+
+# bar plot
+ggplot(pass_rate, aes(x = factor(group), y = pass_rate)) +
+  geom_col() +
+  labs(x = "Group", y = "Pass Rate (%)", title = "Pass Rate by Group") +
+  theme_minimal()
+```
+
+We can see graphically that group 9 and group 12 have a lot more difficulties than others.
