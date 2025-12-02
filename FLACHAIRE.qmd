@@ -340,3 +340,25 @@ cor_by_group <- avg_courses %>%
 cor_by_group %>% 
   kable(caption = "Correlation between Etiquette and Airship by group")
 ```
+
+### Question 22
+
+```{r}
+# we find the group with the highest absolute correlation
+target_group <- cor_by_group %>%
+  slice_max(abs(correlation)) %>%
+  pull(group)
+
+# filter students of that group and plot
+avg_courses %>%
+  filter(group == target_group) %>%
+  ggplot(aes(x = `2`, y = `10`)) +  # x = Airship, y = Etiquette
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  labs(
+    title = paste("Airship vs Etiquette grades for group", target_group),
+    x = "Airship Piloting and Navigation",
+    y = "Etiquette and Social Graces"
+  ) +
+  theme_minimal()
+```
