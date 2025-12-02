@@ -140,5 +140,19 @@ n_grades <- grades %>%
 cat("The data set contains", n_grades, "grades.") # to display
 ```
 
+### Question 11
+
+```{r}
+grades %>%
+  filter(course_id == 7) %>%  # Historical Archaeology and Antiquarian Studies
+  left_join(students, by = "id") %>%
+  group_by(group) %>%
+  summarise(avg_grade = mean(grade, na.rm = TRUE)) %>%
+  ggplot(aes(x = factor(group), y = avg_grade)) +
+  geom_col(fill = "blue") +
+  labs(title = "Average Grade in Historical Archaeology per Group",
+       x = "Group", y = "Average Grade")
+```
+
 
 
