@@ -42,6 +42,27 @@ students <- read_csv(here("students.csv"),
     birth_date = col_date(format = ""),
     sex = col_factor()
   )
+
+## Question 4 
+
+```{r}
+grades <- read_delim(here("grades.csv"),
+  delim = ";",      
+  na = "$",         
+  col_types = cols(
+    id = col_integer(),
+    course_id = col_integer(),
+    grade = col_double()
+  )
+)
+
+str(grades)
+```
+
+
+
+
+
 )
 
 str(students)
