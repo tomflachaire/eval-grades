@@ -415,3 +415,29 @@ final_grades %>%
   ) +
   theme_minimal()
 ```
+
+### Question 26
+
+```{r}
+# we can compute final grade and pass/fail
+pass_df <- avg_per_course %>%
+  left_join(courses %>% select(course_id, module), by = "course_id") %>%
+  group_by(id) %>%
+  summarise(
+    final_grade = mean(avg_course),
+    min_course = min(avg_course),
+    module1 = mean(avg_course[module == 1]),
+    module2 = mean(avg_course[module == 2]),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    pass = (min_course >= 5) & (module1 >= 10) & (module2 >= 10)
+  ) %>%
+  left_join(students %>% select(id, group), by = "id") %>%
+  select(id, group, final_grade, pass) %>%
+  arrange(desc(final_grade))
+
+# show first 10 rows
+pass_df %>%
+  slice_sample(n = 10)
+```
