@@ -211,3 +211,18 @@ grades %>%
        x = "Grades",
        y = "Students")
 ```
+
+### Question 15
+
+```{r}
+grades %>%
+  filter(course_id == 4 & !is.na(grade)) %>% # for alchemy and Chemical Engineering
+  group_by(id) %>%
+  summarise(n_grades = n()) %>%
+  left_join(students, by = "id") %>%
+  select(id, group, n_grades) %>%
+  slice_head(n = 10) %>%
+  kable(caption = "Number of grades in Alchemy and Chemical Engineering (first 10 rows)")
+```
+
+
