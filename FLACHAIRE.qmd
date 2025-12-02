@@ -362,3 +362,26 @@ avg_courses %>%
   ) +
   theme_minimal()
 ```
+
+### Question 23
+
+```{r}
+# wecompute average grade per student per course
+avg_per_course <- grades %>%
+  filter(!is.na(grade)) %>%
+  group_by(id, course_id) %>%
+  summarise(avg_course = mean(grade), .groups = "drop")
+
+# compute final grade = average of the course averages
+final_grades <- avg_per_course %>%
+  group_by(id) %>%
+  summarise(final_grade = mean(avg_course), .groups = "drop") %>%
+  left_join(students, by = "id") %>%
+  select(id, group, sex, final_grade) %>%
+  arrange(desc(final_grade))
+
+# display top 5 students
+final_grades %>%
+  slice_head(n = 5) %>%
+  kable(caption = "First five students by final grade")
+```
