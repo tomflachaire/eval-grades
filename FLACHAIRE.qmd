@@ -130,3 +130,15 @@ students %>%
 
 # 3. Simple grade analysis
 
+### Question 10 
+
+```{r}
+n_grades <- grades %>%
+  filter(!is.na(grade)) %>%
+  nrow()
+
+cat("The data set contains", n_grades, "grades.") # to display
+```
+
+
+
