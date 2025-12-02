@@ -182,3 +182,18 @@ grades %>%
   select(id, group, sex, n_grades) %>%
   slice_head(n = 10) %>%
   kable(caption = "Number of grades per student (first 10 rows)")
+
+# Summary 
+grades %>%
+  filter(!is.na(grade)) %>%
+  group_by(id) %>%
+  summarise(n_grades = n()) %>%
+  summarise(
+    min = min(n_grades),
+    max = max(n_grades),
+    mean = round(mean(n_grades), 1),
+    median = median(n_grades)
+  ) %>%
+  kable(caption = "Summary of number of grades per student")
+```
+
