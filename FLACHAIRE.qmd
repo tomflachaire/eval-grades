@@ -13,6 +13,7 @@ library(dplyr)
 library(readr)
 library(knitr)
 library(here)
+library(lubridate)
 ```
 
 ```{r}
@@ -63,6 +64,7 @@ grades <- read_delim(here("grades.csv"),
 
 str(grades)
 ```
+
 ## Question 5 
 
 ```{r}
@@ -72,6 +74,7 @@ students %>%
   geom_col(fill = "steelblue") +
   labs(title = "Number of Students per Group", x = "Group", y = "Students")
 ```
+
 ## Question 6
 
 ```{r}
@@ -81,3 +84,14 @@ students %>%
   geom_col() +
   labs(title = "Gender Balance per Group", x = "Group", y = "Students")
 ```
+
+## Question 7 
+
+```{r}
+students %>%
+  mutate(age = round(time_length(today() - birth_date, "year"))) %>%
+  ggplot(aes(x = age)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "white") +
+  labs(title = "Distribution of Student Ages", x = "Age", y = "Number of Students")
+```
+
