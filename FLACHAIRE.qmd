@@ -197,3 +197,17 @@ grades %>%
   kable(caption = "Summary of number of grades per student")
 ```
 
+### Question 14
+
+```{r}
+grades %>%
+  filter(!is.na(grade)) %>%
+  group_by(id) %>%
+  summarise(n_grades = n()) %>%
+  left_join(students, by = "id") %>%
+  ggplot(aes(x = n_grades, fill = sex)) +
+  geom_histogram(position = "dodge", binwidth = 1) +
+  labs(title = "Distribution of number of grades by sex",
+       x = "Grades",
+       y = "Students")
+```
