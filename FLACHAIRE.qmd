@@ -225,4 +225,17 @@ grades %>%
   kable(caption = "Number of grades in Alchemy and Chemical Engineering (first 10 rows)")
 ```
 
+### Question 16
 
+```{r}
+grades %>%
+  filter(course_id == 4 & !is.na(grade)) %>%  
+  group_by(id) %>%
+  summarise(n_grades = n()) %>%
+  count(n_grades) %>%                   
+  ggplot(aes(x = n_grades, y = n)) +
+  geom_col() +
+  labs(title = "Distribution of number of grades in Alchemy and Chemical Engineering",
+       x = "Grades",
+       y = "Students")
+```
