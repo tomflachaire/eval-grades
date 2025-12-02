@@ -4,15 +4,31 @@ author: "Tom Flachaire"
 format: html
 ---
 
-## Question 1 - Data loading
+## Question 1 
 
 ```{r}
 here::i_am("eval-grades.Rproj")
 library(ggplot2)
 library(dplyr)
 library(readr)
+library(knitr)
 ```
 
 ```{r}
 courses <- read_csv("courses.csv")
 ```
+
+## Question 2
+
+```{r}
+courses %>%
+  arrange(course) %>%  # Tri alphabétique
+  rename(
+    "course name" = course,
+    "identifier" = course_id,
+    "module" = module,
+    "number of exams" = nb_grades   # colonne réelle de ton fichier
+  ) %>%
+  kable(caption = "Course description table")
+```
+
