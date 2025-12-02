@@ -156,5 +156,15 @@ grades %>%
        x = "Group", y = "Average Grade")
 ```
 
+### Question 12 
+
+```{r}
+grades %>%
+  left_join(courses, by = "course_id") %>%
+  ggplot(aes(x = factor(module), y = grade)) +
+  geom_boxplot() +
+  labs(title = "Grade Distribution by Module",
+       x = "Module", y = "Grade")
+```
 
 
